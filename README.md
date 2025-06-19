@@ -58,6 +58,64 @@ Start the production server:
 npm start
 ```
 
+## Testing
+
+This project uses [Vitest](https://vitest.dev/) for unit and integration testing.
+
+### Running Tests
+
+Run all tests:
+```bash
+npm test
+```
+
+Run tests in watch mode:
+```bash
+npm run test:watch
+```
+
+Run tests with coverage:
+```bash
+npm run test:coverage
+```
+
+Run tests with UI:
+```bash
+npm run test:ui
+```
+
+### Test Structure
+
+```
+tests/
+├── unit/             # Unit tests
+│   ├── services/     # Service layer tests
+│   └── middleware/   # Middleware tests
+├── integration/      # Integration tests
+│   └── routes/       # API route tests
+└── setup.ts         # Test setup and configuration
+```
+
+### Writing Tests
+
+- Unit tests focus on individual functions and classes
+- Integration tests verify API endpoints and middleware
+- Use descriptive test names and group related tests with `describe`
+- Mock external dependencies and database calls
+
+Example unit test:
+```typescript
+import { describe, it, expect } from 'vitest';
+import { ProcessingService } from '../src/services/processingService';
+
+describe('ProcessingService', () => {
+  it('should process data successfully', async () => {
+    const result = await ProcessingService.processData({ test: 'data' });
+    expect(result).toHaveProperty('processed', true);
+  });
+});
+```
+
 ## API Endpoints
 
 ### Health Check
@@ -90,6 +148,10 @@ src/
 - `npm run lint` - Run ESLint
 - `npm run lint:fix` - Run ESLint with auto-fix
 - `npm run clean` - Clean build directory
+- `npm test` - Run all tests
+- `npm run test:watch` - Run tests in watch mode
+- `npm run test:coverage` - Run tests with coverage report
+- `npm run test:ui` - Run tests with interactive UI
 
 ## Environment Variables
 

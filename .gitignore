@@ -99,3 +99,7 @@ logs
 # OS
 .DS_Store
 Thumbs.db
+
+# Test results and reports
+test-results/
+junit.xml
