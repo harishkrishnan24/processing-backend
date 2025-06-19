@@ -165,6 +165,75 @@ src/
 - `npm run test:watch` - Run tests in watch mode
 - `npm run test:coverage` - Run tests with coverage report
 - `npm run test:ui` - Run tests with interactive UI
+- `npm run commitlint` - Validate commit message format
+- `npm run commit` - Interactive commit with conventional commit format
+- `npm run commit:help` - Show commit script usage help
+
+## Development Guidelines
+
+### Commit Message Format
+
+This project uses [Conventional Commits](https://www.conventionalcommits.org/) specification. All commit messages are validated using commitlint.
+
+#### Format
+
+```
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+#### Types
+
+- `feat`: A new feature
+- `fix`: A bug fix
+- `docs`: Documentation only changes
+- `style`: Changes that do not affect the meaning of the code (white-space, formatting, etc)
+- `refactor`: A code change that neither fixes a bug nor adds a feature
+- `perf`: A code change that improves performance
+- `test`: Adding missing tests or correcting existing tests
+- `build`: Changes that affect the build system or external dependencies
+- `ci`: Changes to CI configuration files and scripts
+- `chore`: Other changes that don't modify src or test files
+- `revert`: Reverts a previous commit
+
+#### Examples
+
+```
+feat: add user authentication
+fix: resolve memory leak in processing service
+docs: update API documentation
+test: add unit tests for validation middleware
+```
+
+#### Rules
+
+- Use lowercase for type
+- Keep subject line under 72 characters
+- Don't end subject line with a period
+- Use imperative mood in the subject line
+
+#### Interactive Commit Tool
+
+For easier commit creation, use the interactive commit tool:
+
+```bash
+npm run commit
+```
+
+This will guide you through creating a properly formatted conventional commit with:
+
+- Type selection from a list
+- Scope input (optional)
+- Subject description
+- Body description (optional)
+- Breaking changes notation (if applicable)
+
+#### Manual Commits
+
+If you prefer to write commit messages manually, ensure they follow the conventional format. The commit message format is automatically validated by husky hooks before each commit.
 
 ## Environment Variables
 

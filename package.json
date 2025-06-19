@@ -17,6 +17,9 @@
     "test:watch": "vitest --watch",
     "test:coverage": "vitest --coverage",
     "test:ui": "vitest --ui",
+    "commitlint": "commitlint --edit",
+    "commit": "git-cz",
+    "commit:help": "echo 'Use: npm run commit for interactive commit or git commit for manual commit'",
     "prepare": "husky"
   },
   "keywords": [
@@ -35,6 +38,8 @@
     "morgan": "^1.10.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
     "@eslint/js": "^9.29.0",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
@@ -45,6 +50,8 @@
     "@typescript-eslint/parser": "^8.34.1",
     "@vitest/coverage-v8": "^3.2.4",
     "@vitest/ui": "^3.2.4",
+    "commitizen": "^4.3.1",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^9.29.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.1.2",
@@ -64,5 +71,10 @@
     "*.{json,md}": [
       "prettier --write"
     ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
