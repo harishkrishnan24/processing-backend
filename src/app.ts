@@ -1,15 +1,15 @@
-import cors from "cors";
-import dotenv from "dotenv";
-import express, { Express, Request, Response } from "express";
-import helmet from "helmet";
-import morgan from "morgan";
+import cors from 'cors';
+import dotenv from 'dotenv';
+import express, { Express, Request, Response } from 'express';
+import helmet from 'helmet';
+import morgan from 'morgan';
 
 // Load environment variables
 dotenv.config();
 
 // Import routes
-import { errorHandler } from "./middleware/errorHandler";
-import apiRoutes from "./routes";
+import { errorHandler } from './middleware/errorHandler';
+import apiRoutes from './routes';
 
 class App {
   public app: Express;
@@ -32,24 +32,24 @@ class App {
     this.app.use(
       cors({
         origin:
-          process.env.NODE_ENV === "production"
-            ? ["https://yourdomain.com"]
-            : ["http://localhost:3000"],
+          process.env.NODE_ENV === 'production'
+            ? ['https://yourdomain.com']
+            : ['http://localhost:3000'],
         credentials: true,
       })
     );
 
     // Logging middleware
-    this.app.use(morgan("combined"));
+    this.app.use(morgan('combined'));
 
     // Body parsing middleware
-    this.app.use(express.json({ limit: "10mb" }));
-    this.app.use(express.urlencoded({ extended: true, limit: "10mb" }));
+    this.app.use(express.json({ limit: '10mb' }));
+    this.app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
     // Health check endpoint
-    this.app.get("/health", (req: Request, res: Response) => {
+    this.app.get('/health', (req: Request, res: Response) => {
       res.status(200).json({
-        status: "OK",
+        status: 'OK',
         timestamp: new Date().toISOString(),
         uptime: process.uptime(),
       });
@@ -58,13 +58,13 @@ class App {
 
   private initializeRoutes(): void {
     // API routes
-    this.app.use("/api", apiRoutes);
+    this.app.use('/api', apiRoutes);
 
     // 404 handler
-    this.app.use("*", (req: Request, res: Response) => {
+    this.app.use('*', (req: Request, res: Response) => {
       res.status(404).json({
         success: false,
-        message: "Route not found",
+        message: 'Route not found',
       });
     });
   }

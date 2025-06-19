@@ -12,7 +12,7 @@ describe('Error Handler Middleware', () => {
   beforeEach(() => {
     jsonMock = vi.fn();
     statusMock = vi.fn().mockReturnValue({ json: jsonMock });
-    
+
     mockRequest = {};
     mockResponse = {
       status: statusMock,
@@ -31,7 +31,12 @@ describe('Error Handler Middleware', () => {
       statusCode: 400,
     };
 
-    errorHandler(error, mockRequest as Request, mockResponse as Response, mockNext);
+    errorHandler(
+      error,
+      mockRequest as Request,
+      mockResponse as Response,
+      mockNext
+    );
 
     expect(statusMock).toHaveBeenCalledWith(400);
     expect(jsonMock).toHaveBeenCalledWith({
@@ -48,7 +53,12 @@ describe('Error Handler Middleware', () => {
       message: 'Test error message',
     };
 
-    errorHandler(error, mockRequest as Request, mockResponse as Response, mockNext);
+    errorHandler(
+      error,
+      mockRequest as Request,
+      mockResponse as Response,
+      mockNext
+    );
 
     expect(statusMock).toHaveBeenCalledWith(500);
     expect(jsonMock).toHaveBeenCalledWith({
@@ -70,7 +80,12 @@ describe('Error Handler Middleware', () => {
       stack: 'Error stack trace',
     };
 
-    errorHandler(error, mockRequest as Request, mockResponse as Response, mockNext);
+    errorHandler(
+      error,
+      mockRequest as Request,
+      mockResponse as Response,
+      mockNext
+    );
 
     expect(jsonMock).toHaveBeenCalledWith({
       success: false,
@@ -95,7 +110,12 @@ describe('Error Handler Middleware', () => {
       stack: 'Error stack trace',
     };
 
-    errorHandler(error, mockRequest as Request, mockResponse as Response, mockNext);
+    errorHandler(
+      error,
+      mockRequest as Request,
+      mockResponse as Response,
+      mockNext
+    );
 
     expect(jsonMock).toHaveBeenCalledWith({
       success: false,
@@ -116,7 +136,12 @@ describe('Error Handler Middleware', () => {
       statusCode: 400,
     };
 
-    errorHandler(error, mockRequest as Request, mockResponse as Response, mockNext);
+    errorHandler(
+      error,
+      mockRequest as Request,
+      mockResponse as Response,
+      mockNext
+    );
 
     expect(consoleSpy).toHaveBeenCalledWith(error);
   });

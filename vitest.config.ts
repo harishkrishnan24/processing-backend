@@ -15,7 +15,7 @@ export default defineConfig({
         'tests/',
         '**/*.d.ts',
         '**/*.config.{js,ts}',
-        '**/index.ts'
+        '**/index.ts',
       ],
     },
     include: ['**/*.{test,spec}.{js,ts}'],

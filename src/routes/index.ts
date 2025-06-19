@@ -13,8 +13,8 @@ router.get('/', (req, res) => {
     version: '1.0.0',
     endpoints: {
       health: '/health',
-      api: '/api/v1'
-    }
+      api: '/api/v1',
+    },
   });
 });
 

@@ -23,11 +23,13 @@ A TypeScript Express.js backend for the processing system.
 ### Installation
 
 1. Install dependencies:
+
 ```bash
 npm install
 ```
 
 2. Create environment file:
+
 ```bash
 cp .env.example .env
 ```
@@ -37,11 +39,13 @@ cp .env.example .env
 ### Development
 
 Start the development server:
+
 ```bash
 npm run dev
 ```
 
 Or with file watching:
+
 ```bash
 npm run dev:watch
 ```
@@ -49,11 +53,13 @@ npm run dev:watch
 ### Production
 
 Build the project:
+
 ```bash
 npm run build
 ```
 
 Start the production server:
+
 ```bash
 npm start
 ```
@@ -65,21 +71,25 @@ This project uses [Vitest](https://vitest.dev/) for unit and integration testing
 ### Running Tests
 
 Run all tests:
+
 ```bash
 npm test
 ```
 
 Run tests in watch mode:
+
 ```bash
 npm run test:watch
 ```
 
 Run tests with coverage:
+
 ```bash
 npm run test:coverage
 ```
 
 Run tests with UI:
+
 ```bash
 npm run test:ui
 ```
@@ -104,6 +114,7 @@ tests/
 - Mock external dependencies and database calls
 
 Example unit test:
+
 ```typescript
 import { describe, it, expect } from 'vitest';
 import { ProcessingService } from '../src/services/processingService';
@@ -119,9 +130,11 @@ describe('ProcessingService', () => {
 ## API Endpoints
 
 ### Health Check
+
 - `GET /health` - Application health status
 
 ### API v1
+
 - `GET /api` - API information
 - `GET /api/v1/health` - API v1 health check
 

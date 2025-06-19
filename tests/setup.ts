@@ -6,7 +6,7 @@ import { beforeAll, afterAll } from 'vitest';
 beforeAll(() => {
   // Set test environment variables
   process.env.NODE_ENV = 'test';
-  
+
   // Suppress console logs during tests if needed
   // console.log = vi.fn();
   // console.error = vi.fn();
