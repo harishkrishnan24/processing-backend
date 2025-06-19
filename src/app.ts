@@ -61,7 +61,7 @@ class App {
     this.app.use('/api', apiRoutes);
 
     // 404 handler
-    this.app.use('*', (req: Request, res: Response) => {
+    this.app.use('{*splat}', (req: Request, res: Response) => {
       res.status(404).json({
         success: false,
         message: 'Route not found',
