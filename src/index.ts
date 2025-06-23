@@ -1,15 +1,16 @@
 import App from './app';
+import logger from './config/logger';
 
 const app = new App();
 
 // Graceful shutdown
 process.on('SIGTERM', () => {
-  console.log('SIGTERM received');
+  logger.info('SIGTERM received');
   process.exit(0);
 });
 
 process.on('SIGINT', () => {
-  console.log('SIGINT received');
+  logger.info('SIGINT received');
   process.exit(0);
 });
 

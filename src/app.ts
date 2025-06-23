@@ -1,15 +1,22 @@
 import cors from 'cors';
-import dotenv from 'dotenv';
 import express, { Express, Request, Response } from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
-
-// Load environment variables
-dotenv.config();
+import { connectDatabase } from './config/database';
 
 // Import routes
+import { env } from './config/env';
+import logger from './config/logger';
 import { errorHandler } from './middleware/errorHandler';
 import apiRoutes from './routes';
+
+// Morgan + Winston integration
+const stream = {
+  write: (message: string) => logger.http(message.trim()),
+};
+
+// Only log HTTP requests in 'combined' format in prod, 'dev' in dev
+const morganFormat = env.NODE_ENV === 'production' ? 'combined' : 'dev';
 
 class App {
   public app: Express;
@@ -17,9 +24,10 @@ class App {
 
   constructor() {
     this.app = express();
-    this.port = process.env.PORT || 3000;
+    this.port = env.PORT;
 
     this.initializeMiddlewares();
+    this.initializeDatabase();
     this.initializeRoutes();
     this.initializeErrorHandling();
   }
@@ -32,7 +40,7 @@ class App {
     this.app.use(
       cors({
         origin:
-          process.env.NODE_ENV === 'production'
+          env.NODE_ENV === 'production'
             ? ['https://yourdomain.com']
             : ['http://localhost:3000'],
         credentials: true,
@@ -40,12 +48,23 @@ class App {
     );
 
     // Logging middleware
-    this.app.use(morgan('combined'));
+    this.app.use(morgan(morganFormat, { stream }));
 
     // Body parsing middleware
     this.app.use(express.json({ limit: '10mb' }));
     this.app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+  }
 
+  private async initializeDatabase(): Promise<void> {
+    try {
+      await connectDatabase();
+    } catch (error) {
+      logger.error('Exiting...', error);
+      process.exit(1); // Exit the process if database connection fails
+    }
+  }
+
+  private initializeRoutes(): void {
     // Health check endpoint
     this.app.get('/health', (req: Request, res: Response) => {
       res.status(200).json({
@@ -54,9 +73,7 @@ class App {
         uptime: process.uptime(),
       });
     });
-  }
 
-  private initializeRoutes(): void {
     // API routes
     this.app.use('/api', apiRoutes);
 
@@ -75,11 +92,11 @@ class App {
 
   public listen(): void {
     this.app.listen(this.port, () => {
-      console.log(`🚀 Server running on port ${this.port}`);
-      console.log(
+      logger.info(`🚀 Server running on port ${this.port}`);
+      logger.info(
         `📊 Health check available at http://localhost:${this.port}/health`
       );
-      console.log(`📚 API available at http://localhost:${this.port}/api`);
+      logger.info(`📚 API available at http://localhost:${this.port}/api`);
     });
   }
 }

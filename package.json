@@ -20,7 +20,9 @@
     "commitlint": "commitlint --edit",
     "commit": "git-cz",
     "commit:help": "echo 'Use: npm run commit for interactive commit or git commit for manual commit'",
-    "prepare": "husky"
+    "prepare": "husky",
+    "migrate:dev": "prisma migrate dev",
+    "prisma:generate": "prisma generate"
   },
   "keywords": [
     "express",
@@ -31,11 +33,15 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@prisma/client": "^6.10.1",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^5.1.0",
     "helmet": "^7.1.0",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "prisma": "^6.10.1",
+    "winston": "^3.17.0",
+    "zod": "^3.25.67"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",

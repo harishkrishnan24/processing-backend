@@ -103,3 +103,5 @@ Thumbs.db
 # Test results and reports
 test-results/
 junit.xml
+
+/src/generated/prisma
