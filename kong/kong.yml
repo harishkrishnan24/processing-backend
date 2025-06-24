@@ -1,0 +1,8 @@
+_format_version: '3.0'
+services:
+  - name: processing-backend
+    url: http://host.docker.internal:3000
+    routes:
+      - name: processing-route
+        paths:
+          - /api/processing

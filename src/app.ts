@@ -75,7 +75,7 @@ class App {
     });
 
     // API routes
-    this.app.use('/api', apiRoutes);
+    this.app.use('/', apiRoutes);
 
     // 404 handler
     this.app.use('{*splat}', (req: Request, res: Response) => {
