@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 
 import { StreamService } from '@/services/streams-service';
+import { CreateStreamInput } from '@/validations/stream';
 
 export class StreamController {
   static async getAllStreams(req: Request, res: Response) {
@@ -14,9 +15,11 @@ export class StreamController {
     res.json(stream);
   }
 
-  static async createStream(req: Request, res: Response) {
-    const { data, options } = req.body;
-    const stream = await StreamService.createStream(data, options);
+  static async createStream(
+    req: Request<{}, {}, CreateStreamInput>,
+    res: Response
+  ) {
+    const stream = await StreamService.createStream(req.body);
     res.status(201).json(stream);
   }
 

@@ -1,3 +1,4 @@
+import { CreateStreamInput } from '@/validations/stream';
 export class StreamService {
   static async getAllStreams() {
     // Simulate fetching all streams
@@ -26,7 +27,7 @@ export class StreamService {
     };
   }
 
-  static async createStream(data: any, options: any = {}) {
+  static async createStream(data: CreateStreamInput) {
     // Simulate stream creation
     return {
       id: `proc_${Date.now()}`,
@@ -35,7 +36,6 @@ export class StreamService {
       output: {
         processed: false,
         timestamp: new Date().toISOString(),
-        ...options,
       },
     };
   }

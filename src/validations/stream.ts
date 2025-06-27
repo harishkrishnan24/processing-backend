@@ -72,4 +72,4 @@ export const createStreamSchema = z
 
 // Type exports for TypeScript usage
 export type NodeType = z.infer<typeof nodeTypeSchema>;
-export type CreateStreamRequest = z.infer<typeof createStreamSchema>;
+export type CreateStreamInput = z.infer<typeof createStreamSchema>;
