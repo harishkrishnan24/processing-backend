@@ -19,6 +19,7 @@ A TypeScript Express.js backend for the processing system.
 
 - Node.js (v18 or higher)
 - npm or yarn
+- Docker and Docker Compose (for database)
 
 ### Installation
 
@@ -28,13 +29,42 @@ A TypeScript Express.js backend for the processing system.
 npm install
 ```
 
-2. Create environment file:
+2. Start the database with Docker Compose:
+
+```bash
+docker-compose up -d
+```
+
+This will start:
+
+- PostgreSQL database on port 5432
+- Kong API Gateway on port 8000
+
+To stop the services:
+
+```bash
+docker-compose down
+```
+
+To view logs:
+
+```bash
+docker-compose logs -f
+```
+
+3. Create environment file:
 
 ```bash
 cp .env.example .env
 ```
 
-3. Update the `.env` file with your configuration values.
+4. Update the `.env` file with your configuration values.
+
+5. Run database migrations (if using Prisma):
+
+```bash
+npm run migrate:dev
+```
 
 ### Development
 
