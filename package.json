@@ -22,7 +22,9 @@
     "commit:help": "echo 'Use: npm run commit for interactive commit or git commit for manual commit'",
     "prepare": "husky",
     "migrate:dev": "prisma migrate dev",
-    "prisma:generate": "prisma generate"
+    "prisma:generate": "prisma generate",
+    "prisma:reset": "prisma migrate reset --force && npm run prisma:generate",
+    "prisma:studio": "prisma studio"
   },
   "keywords": [
     "express",

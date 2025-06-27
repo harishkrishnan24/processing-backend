@@ -14,8 +14,57 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+model Stream {
+  id    String @id @default(cuid())
+  name  String @unique
+  nodes Node[]
+  edges Edge[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("streams")
+}
+
+enum NodeType {
+  COLLECTOR
+  PROCESSOR
+  FORWARDER
+}
+
+model Node {
+  id           String   @id @default(cuid())
+  name         String
+  type         NodeType
+  functionName String   @map("function_name")
+  config       Json?
+  stream       Stream?  @relation(fields: [streamId], references: [id])
+  streamId     String?  @map("stream_id")
+  sourceEdges  Edge[]   @relation("EdgeSource")
+  targetEdges  Edge[]   @relation("EdgeTarget")
+
+  @@map("nodes")
+}
+
+model Edge {
+  id       String  @id @default(cuid())
+  source   Node    @relation("EdgeSource", fields: [sourceId], references: [id])
+  sourceId String  @map("source_id")
+  target   Node    @relation("EdgeTarget", fields: [targetId], references: [id])
+  targetId String  @map("target_id")
+  stream   Stream? @relation(fields: [streamId], references: [id])
+  streamId String? @map("stream_id")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("edges")
+}
+
+model NodeFunction {
+  name        String   @id
+  type        NodeType
+  description String
+
+  @@map("node_functions")
 }
