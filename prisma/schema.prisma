@@ -33,7 +33,7 @@ enum NodeType {
 }
 
 model Node {
-  id           String   @id @default(cuid())
+  id           String   @id
   name         String
   type         NodeType
   functionName String   @map("function_name")
@@ -43,6 +43,7 @@ model Node {
   sourceEdges  Edge[]   @relation("EdgeSource")
   targetEdges  Edge[]   @relation("EdgeTarget")
 
+  @@unique([id, streamId]) // Ensure unique nodes per stream
   @@map("nodes")
 }
 

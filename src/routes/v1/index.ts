@@ -1,18 +1,9 @@
 import { Router } from 'express';
-import processingRoutes from './processing';
+import streamRoutes from './streams';
 
 const router = Router();
 
 // Route modules
-router.use('/processing', processingRoutes);
-
-// Health check for v1 API
-router.get('/health', (req, res) => {
-  res.json({
-    status: 'OK',
-    version: 'v1',
-    timestamp: new Date().toISOString(),
-  });
-});
+router.use('/streams', streamRoutes);
 
 export default router;
